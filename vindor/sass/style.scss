@@ -1,0 +1,109 @@
+$maincolor: #6195FF;
+
+body {
+  overflow-x: hidden;
+}
+.container{
+  width: 90vw;
+  margin: 0 auto;
+}
+section, article, footer {
+  height: 100vh;
+}
+.header {
+  background: url('../img/background1.jpg') fixed;
+  background-size: cover;
+  &_overly {
+    background-color: rgba(black, 0.5);
+    height: 100vh;
+    &-info {
+      width: 80%;
+      margin: 0 auto;
+      padding-top: 30vh; // anuthr time be the in center in jquery
+      color: white;
+      text-align: center;
+      h1 {
+        font-size: 3.4em;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-bottom: 0.4em;
+      }
+      p {
+        line-height: 1.5em;
+      }
+    }
+  }
+}
+
+a {text-decoration: none;}
+
+.primary {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: white;
+  color: black;
+  font-size: 1em;
+  border-radius: 10px;
+}
+
+.nav {
+  position: fixed;
+  background-color: white;
+  box-shadow: 0 0 2px black;
+  width: 100%;
+  text-transform: capitalize;
+  top: 0;
+  overflow: hidden;
+  &_links-a {
+    display: inline-block;
+    padding: 20px 0;
+    margin: 0 10px;
+    &, &:hover, &:focus {
+      color: inherit;
+    }
+  }
+  &_logo {
+    float: left;
+    width: 30%;
+    &-a {
+      display: inline-block;
+      text-decoration: none;
+      font-size: 2.5em;
+      text-transform: uppercase;
+      padding-top: 8px;
+      font-weight: bold;
+      &, &:hover, &:focus {
+        color: inherit;
+      }
+    }
+  }
+  &_links {
+    float: right;
+    width: 70%;
+    text-align: right;
+    &-a {
+      position: relative;
+      overflow: hidden;
+      transition: color 300ms ease-in-out;
+      &:last-child {
+        margin-right: 0;
+      }
+      &:after {
+        transition: left 300ms ease-in-out;
+        content: attr(data-content);
+        position: absolute;
+        display: inline-block;
+        left: -100%;
+        border-bottom: 3px solid $maincolor;
+        color: transparent;
+      }
+      &:hover {
+        color: $maincolor;
+        &:after {
+          left: 0;
+          color: transparent;
+        }
+      }
+    }
+  }
+}
