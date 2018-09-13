@@ -9,14 +9,14 @@ var gulp        = require ('gulp'),
     autoprefix  = require('autoprefixer'),
     rucksack    = require('rucksack-css'),
     postcss     = require('gulp-postcss'),
-    sass        = require('gulp-ruby-sass'),
+    sass        = require('gulp-sass'),
     lost        = require('lost');
 
 var files = {
   title: 'project',
   version: '1.0',
   desginer: {
-    name: 'melade & mena',
+    name: 'melad & mena',
     url: 'www.jesus.com'
   },
   inSass: 'vindor/style.scss',
@@ -33,13 +33,14 @@ var banner = ['/*!\n',
 
 // uglify For javaScript mini
 gulp.task('scripts', function(){
-  gulp.src(files.js)
+  return gulp.src(files.js)
       .pipe(plumber())
       .pipe(uglify())
       .pipe(gulp.dest('minjs'));
 });
 //sass for compile the code
 gulp.task('sass', function(){
+  'use strict';
   var processors = [
     lost(),
     rucksack(),
@@ -61,6 +62,7 @@ gulp.task('sass', function(){
 
 gulp.task('watch', function(){
   gulp.watch(files.js, ['scripts']);
+  gulp.watch(files.inSass, ['sass']);
 });
 
 gulp.task('default', ['scripts','sass','watch']);
