@@ -1,7 +1,3 @@
-/*!
- * project v1.0 Copyright &copy; 2018
- * All Desgin &amp; code by melad & mena | www.jesus.com
- */
 
 
 

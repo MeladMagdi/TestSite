@@ -19,10 +19,11 @@ var files = {
     name: 'melad & mena',
     url: 'www.jesus.com'
   },
-  inSass: 'vindor/style.scss',
+  inSass: ['vindor/sass/*/*.scss', 'vindor/sass/*.scss' ],
   outCss: 'puplic/css/',
   css: 'puplic/css/',
-  js: 'puplic/js/*.js'
+  outJs: 'puplic/js/',
+  inJs: 'vindor/js/*.js'
 };
 
 // Copyright
@@ -33,10 +34,14 @@ var banner = ['/*!\n',
 
 // uglify For javaScript mini
 gulp.task('scripts', function(){
-  return gulp.src(files.js)
+  gulp.src(files.inJs)
       .pipe(plumber())
+      .pipe(header(banner, { pkg: pkg }))
+      .pipe(gulp.dest(files.outJs))
       .pipe(uglify())
-      .pipe(gulp.dest('minjs'));
+      .pipe(header(banner, { pkg: pkg }))
+      .pipe(rename({ suffix: '.min' }))
+      .pipe(gulp.dest(files.outJs));
 });
 //sass for compile the code
 gulp.task('sass', function(){
@@ -49,7 +54,9 @@ gulp.task('sass', function(){
 
   gulp.src(files.inSass)
       .pipe(plumber())
-      .pipe(sass())
+      .pipe(sass({
+        outputStyle: 'expanded'
+      }))
       .pipe(postcss(processors))// use processors
       .pipe(header(banner, { pkg: pkg }))
       .pipe(gulp.dest(files.outCss))// convert to css
@@ -61,8 +68,8 @@ gulp.task('sass', function(){
 // gulp watch is fot watching file
 
 gulp.task('watch', function(){
-  gulp.watch(files.js, ['scripts']);
   gulp.watch(files.inSass, ['sass']);
+  gulp.watch(files.inJs, ['scripts']);
 });
 
 gulp.task('default', ['scripts','sass','watch']);
